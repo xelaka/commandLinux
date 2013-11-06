@@ -1,15 +1,14 @@
 #include "my_lib.h"
 
 int main(int argc, char** argv){
-	
 
-	
+	int i = 1;
+
 	OPTIONS op;
 	op.arg_no_options = TRUE;	//Default
 	op.arg_same = FALSE;			//File are the same
 	op.arg_help = FALSE;				//Display help message
 	
-	int i = 1;
 	for(i = 1; i < argc; i++){
 		if(!my_strcmp(argv[i], "--help"))
 			op.arg_help = TRUE;
