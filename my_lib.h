@@ -22,6 +22,7 @@ int length(char*);
 typedef struct{
 	unsigned int arg_no_options;	//Default
 	unsigned int arg_same;			//Files are same
+	unsigned int arg_differ;			//File are differents
 	unsigned int arg_help;			//Display help message
 } OPTIONS;	
 
