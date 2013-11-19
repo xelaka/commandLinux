@@ -10,6 +10,12 @@ int main(int argc, char** argv){
 	op.arg_differ = FALSE;			//File are differents (-q & --brief)
 	op.arg_help = FALSE;				//Display help message
 	
+	FILE *f1;
+    FILE *f2;
+	
+	char *fic1 = argv[argc-2];
+    char *fic2 = argv[argc-1];
+	
 	/*
 		A Faire
 		-i & --ignore-case				//ignore la case
@@ -46,7 +52,22 @@ int main(int argc, char** argv){
 		help();
 		return 1;
 	}
+	
+	// opening files and test success, report if it doesn't
+	f1 = fopen(fic1, "r");
+    f2 = fopen(fic2, "r");
+		
+	if(f1 == NULL || f2 == NULL){
+		printf("error: could not open files. \n");
+        printf("exiting...");
+        return -1;
+	}
+	
 	//Test
+	 if(op.arg_no_options){    // cmp files line by line. NO OPTION
+        printf("arg_no_option NO options\n");
+        diff(f1, f2, &op);
+	}
 	//op.arg_no_options? printf("arg_no_options ENABLED\n") : printf("arg_no_options DISABLED");
 	
 	return 0;
