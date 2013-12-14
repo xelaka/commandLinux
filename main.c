@@ -59,14 +59,14 @@ int main(int argc, char** argv){
 		
 	if(f1 == NULL || f2 == NULL){
 		printf("error: could not open files. \n");
-        printf("exiting...");
-        return -1;
+		printf("exiting...");
+		return -1;
 	}
 	
 	//Test
-	 if(op.arg_no_options){    // cmp files line by line. NO OPTION
-        printf("arg_no_option NO options\n");
-        diff(f1, f2, &op);
+	if(op.arg_no_options){    // cmp files line by line. NO OPTION
+		printf("arg_no_option NO options\n");
+		diff(f1, f2, &op);
 	}
 	//op.arg_no_options? printf("arg_no_options ENABLED\n") : printf("arg_no_options DISABLED");
 	
