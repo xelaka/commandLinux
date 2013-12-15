@@ -11,19 +11,16 @@ Rôle : prototypes des fonctions autorisées.
 #define MY_LIB_H_INCLUDED
 
 #include <stdio.h>
-#include "about.h"
+#include <stdlib.h>
 
 #define TRUE 1
 #define FALSE 0
 
-int my_strcmp(char*, char*);
-int length(char*);
+char* my_strdup(const char* s1);
+char* my_strcpy(char* dest, const char* src);
 
-typedef struct{
-	unsigned int arg_no_options;	//Default
-	unsigned int arg_same;			//Files are same
-	unsigned int arg_differ;			//File are differents
-	unsigned int arg_help;			//Display help message
-} OPTIONS;	
+int length(char* input);
+int my_strcmp(char* array1, char* array2);	
+int my_atoi(char* value);
 
 #endif

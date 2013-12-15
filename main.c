@@ -1,4 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "my_lib.h"
+#include "diff.h"
 
 int main(int argc, char** argv){
 
@@ -10,11 +13,16 @@ int main(int argc, char** argv){
 	op.arg_differ = FALSE;			//File are differents (-q & --brief)
 	op.arg_help = FALSE;				//Display help message
 	
-	FILE *f1;
-    FILE *f2;
+	FILE *file1;
+    FILE *file2;
 	
-	char *fic1 = argv[argc-2];
-    char *fic2 = argv[argc-1];
+	char *f1 = argv[argc-2];
+    char *f2 = argv[argc-1];
+	
+	if (argc < 3 || op.arg_help){
+		printf("help ici");
+		return 1;
+    }
 	
 	/*
 		A Faire
@@ -48,25 +56,37 @@ int main(int argc, char** argv){
 		//if(!my_strcmp(argv[i], "-a"))
 	}
 	
-	if(op.arg_help){
-		help();
-		return 1;
+	// opening files and test success, report if it doesn't
+	if(file1 == NULL || file2 == NULL){
+		printf("error: could not open files. \n");
+        printf("exiting...");
+        return -1;
 	}
 	
-	// opening files and test success, report if it doesn't
-	f1 = fopen(fic1, "r");
-    f2 = fopen(fic2, "r");
+	if(op.arg_same){
+		file1 = fopen(f1, "rb");
+		file2 = fopen(f2, "rb");
 		
-	if(f1 == NULL || f2 == NULL){
-		printf("error: could not open files. \n");
-		printf("exiting...");
-		return -1;
+		(sameContents(file1,file2))? printf("No diff") : printf("Diff");
+		
+		fclose(file1);
+		fclose(file2);
 	}
 	
 	//Test
-	if(op.arg_no_options){    // cmp files line by line. NO OPTION
-		printf("arg_no_option NO options\n");
-		diff(f1, f2, &op);
+	 if(op.arg_no_options){    // cmp files line by line. NO OPTION
+		file1 = fopen(f1, "r");
+		file2 = fopen(f2, "r");
+		
+		int count1 = getLines(file1);
+		int count2 = getLines(file2);
+		
+		diff(file1, file2, count1, count2, &op);
+	
+		printf("resultat de diff ici");
+		
+		fclose(file1);
+		fclose(file2);
 	}
 	//op.arg_no_options? printf("arg_no_options ENABLED\n") : printf("arg_no_options DISABLED");
 	
